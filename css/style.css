@@ -248,6 +248,7 @@ button:focus-visible {
   font-size: 14px;
   padding: 6px 2px;
   position: relative;
+  white-space: nowrap;
 }
 
 .global-nav-list a::after {
@@ -534,6 +535,80 @@ button:focus-visible {
 @keyframes dawn-glow {
   0%, 100% { opacity: 0.55; }
   50%      { opacity: 1; }
+}
+
+
+/* ------------------------------------------------------------
+   ページを開いたときの導入演出（ファーストビュー）
+   夜の静けさの中から、光と言葉が順に現れます。
+   「動きを減らす」設定では自動的に停止し、即座に表示されます。
+   ------------------------------------------------------------ */
+
+/* 霧が晴れるように現れる */
+@keyframes hero-emerge {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 筆で書き下ろすように、上から現れる（縦書きコピー用） */
+@keyframes hero-ink {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.4; }
+  to   { clip-path: inset(0 0 0% 0); opacity: 1; }
+}
+
+/* 地平線の光が一筋、引かれる */
+@keyframes horizon-draw {
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 0.65; transform: scaleX(0.96); }
+}
+
+.hero-role {
+  animation: hero-emerge 1.3s ease 0.25s both;
+}
+
+.hero-name-ja {
+  animation: hero-emerge 1.5s ease 0.55s both;
+}
+
+.hero-name-en {
+  animation: hero-emerge 1.5s ease 0.85s both;
+}
+
+.hero-copy span:nth-child(1) {
+  animation: hero-ink 1.5s cubic-bezier(0.3, 0, 0.2, 1) 1.25s both;
+}
+
+.hero-copy span:nth-child(2) {
+  animation: hero-ink 1.5s cubic-bezier(0.3, 0, 0.2, 1) 1.75s both;
+}
+
+.hero-lead {
+  animation: hero-emerge 1.4s ease 2.15s both;
+}
+
+.hero-actions {
+  animation: hero-emerge 1.4s ease 2.5s both;
+}
+
+.hero-horizon {
+  transform-origin: center;
+  animation:
+    horizon-draw 2s cubic-bezier(0.2, 0, 0.2, 1) 0.9s both,
+    horizon-breath 7s ease-in-out 2.9s infinite;
+}
+
+.hero-bg::after {
+  animation:
+    hero-emerge 2.4s ease 1s both,
+    dawn-glow 9s ease-in-out 3.4s infinite;
 }
 
 /* ページ最後の予約セクション：昇りはじめた太陽の光 */
@@ -1339,6 +1414,18 @@ button:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
+
+.shop-map {
+  margin-top: 24px;
+}
+
+.shop-map iframe {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 1px solid var(--color-border);
+}
+
 /* ------------------------------------------------------------
    SNS
    ------------------------------------------------------------ */
@@ -1650,28 +1737,15 @@ button:focus-visible {
   }
 }
 
+
 /* ------------------------------------------------------------
-   スマートフォン
+   タブレット〜中間幅：メニューが入りきらないため
+   ハンバーガーメニューに切り替える
    ------------------------------------------------------------ */
-@media (max-width: 767px) {
-  body {
-    font-size: 15px;
-    /* 固定予約ボタンでフッターが隠れないよう余白を確保 */
-    padding-bottom: 88px;
-  }
-
-  .section {
-    padding: 68px 0;
-  }
-
-  /* ハンバーガーメニュー */
+@media (max-width: 1080px) {
   .menu-toggle {
     display: flex;
     margin-left: auto;
-  }
-
-  .header-reserve-btn {
-    display: none;
   }
 
   .global-nav {
@@ -1715,6 +1789,27 @@ button:focus-visible {
   /* メニューを開いている間は背景のスクロールを止める */
   body.nav-open {
     overflow: hidden;
+  }
+}
+
+/* ------------------------------------------------------------
+   スマートフォン
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+    /* 固定予約ボタンでフッターが隠れないよう余白を確保 */
+    padding-bottom: 88px;
+  }
+
+  .section {
+    padding: 68px 0;
+  }
+
+  /* スマートフォンではヘッダーの予約ボタンを隠す
+     (メニュー内と画面下部の固定ボタンがあるため) */
+  .header-reserve-btn {
+    display: none;
   }
 
   .worry-list,
