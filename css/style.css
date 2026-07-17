@@ -1748,37 +1748,47 @@ button:focus-visible {
     margin-left: auto;
   }
 
+  /* メニューはヘッダーの真下に展開するドロップダウン方式
+     （ヘッダーのぼかし効果と干渉しないよう、fixedではなく
+       ヘッダー基準のabsoluteで配置） */
   .global-nav {
-    position: fixed;
-    top: var(--header-height);
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: 0;
-    background-color: rgba(248, 245, 235, 0.99);
-    padding: 32px 24px 40px;
-    overflow-y: auto;
-    transform: translateX(100%);
+    background-color: #f8f5eb;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 14px 28px rgba(23, 27, 42, 0.14);
+    padding: 6px 20px 20px;
+    max-height: 0;
+    overflow: hidden;
     visibility: hidden;
-    transition: transform 0.3s ease, visibility 0.3s;
+    transition: max-height 0.35s ease, visibility 0.35s;
   }
 
   .global-nav.is-open {
-    transform: translateX(0);
+    max-height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
     visibility: visible;
   }
 
   .global-nav-list {
     flex-direction: column;
     gap: 0;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
 
   .global-nav-list a {
     display: block;
-    padding: 16px 6px;
-    font-size: 16px;
+    padding: 15px 4px;
+    font-size: 15.5px;
+    letter-spacing: 0.06em;
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .global-nav-list li:last-child a {
+    border-bottom: none;
   }
 
   .nav-reserve-btn {
