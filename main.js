@@ -1,118 +1,1503 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー｜晴道望喜</title>
-  <meta name="description" content="占い師・晴道望喜の個人紹介サイトにおけるプライバシーポリシーです。">
-  <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#191d2b">
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&amp;family=Shippori+Mincho:wght@400;500;600&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* 下層ページ用の簡易スタイル */
-    .subpage-main { padding: calc(72px + 56px) 0 96px; }
-    .subpage-title {
-      font-family: var(--font-heading);
-      font-size: 26px; font-weight: 600; letter-spacing: 0.1em;
-      text-align: center; margin-bottom: 12px;
-    }
-    .subpage-title::after {
-      content: ""; display: block; width: 48px; height: 1px;
-      background-color: var(--color-accent); margin: 22px auto 0;
-    }
-    .subpage-date { text-align: center; font-size: 13px; color: var(--color-text-light); margin-bottom: 56px; }
-    .policy h2 {
-      font-family: var(--font-heading); font-size: 18px; font-weight: 600;
-      letter-spacing: 0.06em; margin: 44px 0 14px;
-      padding-left: 14px; border-left: 2px solid var(--color-accent);
-    }
-    .policy p { font-size: 14.5px; margin-bottom: 1em; }
-    .policy ul { margin: 0 0 1em 1.4em; list-style: disc; font-size: 14.5px; }
-    .policy li { margin-bottom: 0.4em; }
-    .subpage-back { text-align: center; margin-top: 64px; }
-  </style>
-</head>
-<body>
+/* ============================================================
+   晴道望喜 公式サイト スタイルシート
+   テーマ：静かな祈り・夜明け・道を照らす光
+   ============================================================ */
 
-  <a class="skip-link" href="#main">本文へ移動する</a>
+/* ------------------------------------------------------------
+   ここを変更：サイト全体の配色
+   下の変数の色コードを書き換えると、サイト全体の色が変わります。
+   ------------------------------------------------------------ */
+:root {
+  --color-bg: #faf8f1;          /* 基本の背景（アイボリー） */
+  --color-bg-light: #f2eee1;    /* 交互に使う背景（生成り） */
+  --color-text: #26272b;        /* 本文の文字色（深い墨色） */
+  --color-text-light: #6f6c63;  /* 補足の文字色（薄いグレー寄り） */
+  --color-accent: #a2854a;      /* アクセント（落ち着いた金色） */
+  --color-accent-sub: #a3492f;  /* サブアクセント（控えめな朱色） */
+  --color-border: #e1dbc9;      /* 罫線の色 */
 
-  <header class="site-header is-scrolled">
-    <div class="header-inner">
-      <a class="site-logo" href="index.html">
-        <span class="site-logo-name">晴道 望喜</span>
-        <span class="site-logo-en">Haremichi Mochiharu</span>
-      </a>
-      <a class="btn btn-primary header-reserve-btn" data-link="reservation"
-         href="https://noa-fortune.stores.jp/reserve/sakae/2063769#pageContent"
-         target="_blank" rel="noopener">
-        鑑定を予約する<span class="external-mark" aria-hidden="true">↗</span>
-        <span class="visually-hidden">（外部の公式予約ページが別タブで開きます）</span>
-      </a>
-    </div>
-  </header>
+  /* 夜明けの空の色（ファーストビューなどで使用） */
+  --color-ink: #171b2a;         /* 濃紺（夜の空） */
+  --color-ink-2: #232c47;       /* 夜明け前の空 */
+  --color-dawn: #c8a86a;        /* 地平線の光 */
 
-  <main id="main" class="subpage-main">
-    <div class="container container-narrow">
-      <h1 class="subpage-title">プライバシーポリシー</h1>
-      <!-- ここを変更：制定日・改定日 -->
-      <p class="subpage-date">制定日：ここを変更（例：2026年◯月◯日）</p>
+  /* 書体 */
+  --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --font-heading: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-en: "Cormorant Garamond", "Times New Roman", serif;
 
-      <div class="policy">
-        <p>本ページは、占い師・晴道望喜（以下「当方」といいます）が運営する個人紹介サイト（以下「当サイト」といいます）における、個人情報の取り扱いについて定めるものです。</p>
+  --header-height: 72px;
+}
 
-        <h2>1. 当サイトの性質について</h2>
-        <p>当サイトは、占い師・晴道望喜の活動を紹介する個人サイトです。当サイト上では、予約の受付、決済、会員登録などは行っておらず、これらに伴う個人情報の入力・送信は発生しません。</p>
+/* ------------------------------------------------------------
+   リセット・基本設定
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        <h2>2. アクセス解析について</h2>
-        <p>当サイトでは、現在アクセス解析ツールは導入していません。今後、サイト改善のためにアクセス解析ツール（Google Analyticsなど）を導入する場合は、本ページにその旨と、収集される情報の内容を追記します。</p>
-        <!-- ここを変更：アクセス解析を導入した場合は、上の段落を書き換えて
-             使用ツール名・収集情報・オプトアウト方法を記載してください -->
+html {
+  scroll-behavior: smooth;
+  /* 固定ヘッダーの高さぶん、ページ内リンクの位置を下げる */
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
 
-        <h2>3. 外部リンクについて</h2>
-        <p>当サイトには、所属店舗の公式予約ページや各SNSなど、外部サイトへのリンクが含まれます。リンク先の外部サイトにおける個人情報の取り扱いやコンテンツについて、当方は責任を負いかねます。各リンク先のプライバシーポリシー・利用規約をご確認ください。</p>
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
 
-        <h2>4. 予約時の個人情報について</h2>
-        <p>鑑定のご予約は、所属店舗（占いの館ノア）の公式予約ページで受け付けています。予約の際に入力いただく氏名・連絡先などの個人情報は、所属店舗および予約システム運営会社の規約・プライバシーポリシーに基づいて管理されます。当サイトがこれらの情報を取得・保管することはありません。</p>
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-        <h2>5. SNSへのリンクについて</h2>
-        <p>当サイトからリンクしているInstagram、X、TikTok、YouTube、LINEなどのSNSは、それぞれの運営会社が提供するサービスです。各SNS上での情報の取り扱いは、各サービスのプライバシーポリシーが適用されます。</p>
+ul,
+ol {
+  list-style: none;
+}
 
-        <h2>6. お問い合わせに関する情報の管理</h2>
-        <p>SNSのメッセージ機能などを通じてお問い合わせいただいた内容や連絡先は、お問い合わせへの対応の目的にのみ使用し、ご本人の同意なく第三者へ提供することはありません。</p>
+a {
+  color: var(--color-accent-sub);
+  text-decoration: none;
+}
 
-        <h2>7. 鑑定内容の秘密保持</h2>
-        <p>鑑定の中でお伺いした相談内容は、適切に取り扱い、ご本人の同意なく第三者へ開示することはありません。</p>
+a:hover {
+  opacity: 0.85;
+}
 
-        <h2>8. 免責事項</h2>
-        <ul>
-          <li>当サイトに掲載している情報は、正確性の維持に努めていますが、内容を保証するものではありません。</li>
-          <li>当サイトの利用により生じたいかなる損害についても、当方は責任を負いかねます。</li>
-          <li>鑑定内容は、考え方や選択肢を整理するための参考情報であり、結果を保証するものではありません。</li>
-        </ul>
+/* キーボード操作時のフォーカスを明確に表示する */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
-        <h2>9. 本ポリシーの改定について</h2>
-        <p>本ポリシーの内容は、必要に応じて予告なく改定することがあります。改定後の内容は、当ページに掲載した時点から適用されます。</p>
-      </div>
+/* スクリーンリーダー専用テキスト */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-      <div class="subpage-back">
-        <a class="btn btn-outline" href="index.html">トップページへ戻る</a>
-      </div>
-    </div>
-  </main>
+/* スキップリンク */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 8px;
+  z-index: 200;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 4px;
+  transition: top 0.2s;
+}
 
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer-disclaimer">
-        当サイトは占い師・晴道望喜の個人紹介サイトです。鑑定予約、料金、出演日、店舗運営については、占いの館ノアの公式予約ページをご確認ください。
-      </p>
-      <p class="footer-copyright">&copy; <span id="current-year">2026</span> 晴道望喜 All Rights Reserved.</p>
-    </div>
-  </footer>
+.skip-link:focus {
+  top: 8px;
+}
 
-  <script src="js/main.js"></script>
-</body>
-</html>
+/* 外部リンクの印 */
+.external-mark {
+  display: inline-block;
+  margin-left: 0.35em;
+  font-size: 0.8em;
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------
+   ボタン
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-block;
+  padding: 13px 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s, transform 0.2s;
+  min-height: 48px;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* メインの予約ボタン（濃紺） */
+.btn-primary {
+  background-color: var(--color-ink);
+  color: #f6f2e7;
+  border-color: var(--color-ink);
+}
+
+/* 金色の予約ボタン（最重要のCTA用） */
+.btn-gold {
+  background: linear-gradient(135deg, #b3945a 0%, #96793f 100%);
+  color: #fffdf6;
+  border-color: #96793f;
+  font-weight: 700;
+}
+
+/* 枠線のみのボタン */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+/* 暗い背景用の淡いボタン */
+.btn-ghost-light {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f2ecdc;
+  border-color: rgba(242, 236, 220, 0.5);
+}
+
+.btn-lg { padding: 16px 36px; font-size: 16px; }
+.btn-xl { padding: 18px 44px; font-size: 17px; }
+.btn-sm { padding: 9px 20px; font-size: 14px; min-height: 42px; }
+.btn-block { display: block; width: 100%; }
+
+/* ------------------------------------------------------------
+   ヘッダー
+   ------------------------------------------------------------ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(250, 248, 241, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* スクロールすると背景が少し濃くなる */
+.site-header.is-scrolled {
+  background-color: rgba(248, 245, 235, 0.97);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 1px 10px rgba(23, 27, 42, 0.06);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: var(--header-height);
+}
+
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.site-logo-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.site-logo-en {
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+}
+
+.global-nav {
+  margin-left: auto;
+}
+
+.global-nav-list {
+  display: flex;
+  gap: 22px;
+}
+
+.global-nav-list a {
+  color: var(--color-text);
+  font-size: 14px;
+  padding: 6px 2px;
+  position: relative;
+}
+
+.global-nav-list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+}
+
+.global-nav-list a:hover::after,
+.global-nav-list a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.header-reserve-btn {
+  padding: 10px 22px;
+  font-size: 14px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+/* メニュー内予約ボタンはスマートフォンのみ表示 */
+.nav-reserve-btn {
+  display: none;
+}
+
+/* ハンバーガーボタン */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.menu-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle-bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------
+   ファーストビュー（夜明けの空）
+   ------------------------------------------------------------ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--header-height) + 48px) 20px 96px;
+  overflow: hidden;
+  color: #f2edde;
+  text-align: center;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* 画像がない場合の背景：夜から夜明けへ向かうグラデーション */
+  background:
+    radial-gradient(ellipse 120% 55% at 50% 108%, rgba(200, 168, 106, 0.5) 0%, rgba(200, 168, 106, 0) 62%),
+    linear-gradient(180deg, #12151f 0%, var(--color-ink) 34%, var(--color-ink-2) 66%, #4a4560 88%, #7d6a63 100%);
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+/* hero.jpg が存在しない場合は画像を非表示にする */
+.hero-photo.is-missing {
+  display: none;
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 21, 31, 0.55) 0%, rgba(23, 27, 42, 0.35) 55%, rgba(23, 27, 42, 0.55) 100%);
+}
+
+/* 地平線に走る一筋の光 */
+.hero-horizon {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 13%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(200, 168, 106, 0) 0%, rgba(216, 187, 128, 0.9) 50%, rgba(200, 168, 106, 0) 100%);
+}
+
+.hero-inner {
+  max-width: 820px;
+}
+
+.hero-role {
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: rgba(230, 220, 195, 0.85);
+  margin-bottom: 22px;
+}
+
+.hero-name {
+  margin-bottom: 34px;
+  font-weight: 500;
+}
+
+.hero-name-ja {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 6vw, 52px);
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+}
+
+.hero-name-en {
+  display: block;
+  font-family: var(--font-en);
+  font-size: clamp(14px, 2vw, 17px);
+  letter-spacing: 0.35em;
+  color: rgba(216, 187, 128, 0.95);
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* キャッチコピー（PCでは縦書き） */
+.hero-copy {
+  font-family: var(--font-heading);
+  font-size: clamp(19px, 3vw, 25px);
+  letter-spacing: 0.18em;
+  line-height: 2.4;
+  margin-bottom: 30px;
+}
+
+.hero-copy span {
+  display: block;
+}
+
+.hero-lead {
+  font-size: 14.5px;
+  line-height: 2.2;
+  color: rgba(240, 234, 218, 0.88);
+  max-width: 640px;
+  margin: 0 auto 42px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* PC表示ではキャッチコピーを縦書きにして、静かな祈りの雰囲気を出す */
+@media (min-width: 900px) {
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "role   copy"
+      "name   copy"
+      "lead   copy"
+      "action copy";
+    column-gap: 72px;
+    text-align: left;
+    align-items: center;
+    max-width: 980px;
+  }
+
+  .hero-role   { grid-area: role; }
+  .hero-name   { grid-area: name; }
+  .hero-lead   { grid-area: lead; margin-left: 0; }
+  .hero-actions { grid-area: action; justify-content: flex-start; }
+
+  .hero-copy {
+    grid-area: copy;
+    writing-mode: vertical-rl;
+    font-size: clamp(24px, 2.6vw, 32px);
+    letter-spacing: 0.32em;
+    line-height: 1;
+    margin-bottom: 0;
+    height: 420px;
+    display: flex;
+    gap: 26px;
+    align-self: center;
+    border-left: 1px solid rgba(216, 187, 128, 0.35);
+    padding-left: 34px;
+  }
+}
+
+/* ------------------------------------------------------------
+   セクション共通
+   ------------------------------------------------------------ */
+.section {
+  padding: 96px 0;
+  background-color: var(--color-bg);
+}
+
+.section-alt {
+  background-color: var(--color-bg-light);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-narrow {
+  max-width: 840px;
+}
+
+.section-eyebrow {
+  font-family: var(--font-en);
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 4vw, 30px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+/* 見出し下の細い金線 */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  background-color: var(--color-accent);
+  margin: 26px auto 0;
+}
+
+.section-note {
+  text-align: center;
+  margin-top: 44px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+}
+
+.section-note-small {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.section-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 48px;
+}
+
+/* ------------------------------------------------------------
+   晴道望喜について
+   ------------------------------------------------------------ */
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-text p + p,
+.profile-text p + p,
+.goshintaku-text p + p {
+  margin-top: 1.4em;
+}
+
+/* 写真の枠（画像がなくても静かなプレースホルダーを表示） */
+.about-photo-frame,
+.profile-photo-frame {
+  position: relative;
+  aspect-ratio: 1 / 1; /* ここを変更：写真の縦横比（正方形の写真に合わせています。縦長写真なら 4 / 5 に） */
+  background:
+    linear-gradient(160deg, #ece6d4 0%, #e2dbc6 100%);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.about-photo-frame img,
+.profile-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-photo-frame img.is-missing,
+.profile-photo-frame img.is-missing {
+  display: none;
+}
+
+.photo-placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: #a89f89;
+  z-index: 0;
+}
+
+.about-photo-frame img,
+.profile-photo-frame img {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   お悩み一覧
+   ------------------------------------------------------------ */
+.worry-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 28px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.worry-list li {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 2px solid var(--color-accent);
+  padding: 16px 20px;
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------------
+   ご神託タロット 3段階
+   ------------------------------------------------------------ */
+.goshintaku-text {
+  max-width: 720px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.step3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  counter-reset: step;
+}
+
+.step3-item {
+  position: relative;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  padding: 40px 26px 30px;
+  text-align: center;
+}
+
+.step3-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 18px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--color-accent);
+}
+
+.step3-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+
+.step3-item p {
+  font-size: 14px;
+  color: var(--color-text-light);
+  text-align: left;
+}
+
+/* ------------------------------------------------------------
+   3つの特徴
+   ------------------------------------------------------------ */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.feature-card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-accent);
+  padding: 36px 28px;
+  box-shadow: 0 2px 12px rgba(23, 27, 42, 0.04);
+}
+
+.feature-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.feature-card p {
+  font-size: 14.5px;
+  color: var(--color-text-light);
+}
+
+/* ------------------------------------------------------------
+   料金
+   ------------------------------------------------------------ */
+.price-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.price-item {
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.price-item-pair {
+  grid-column: 1 / -1;
+}
+
+.price-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 12px;
+}
+
+.price-time {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.price-amount {
+  font-family: var(--font-en);
+  font-size: 28px;
+  color: var(--color-accent-sub);
+  letter-spacing: 0.02em;
+}
+
+.price-unit {
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin-left: 2px;
+  color: var(--color-text);
+}
+
+.price-desc {
+  font-size: 14px;
+  color: var(--color-text-light);
+  flex-grow: 1;
+}
+
+.price-note {
+  max-width: 720px;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+/* ------------------------------------------------------------
+   初めての方へ
+   ------------------------------------------------------------ */
+.assurance-list {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  display: grid;
+  gap: 14px;
+}
+
+.assurance-list li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 15.5px;
+}
+
+.assurance-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 14px;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
+.assurance-close {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 34px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 2px solid var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+/* ------------------------------------------------------------
+   鑑定の流れ（タイムライン）
+   ------------------------------------------------------------ */
+.flow-timeline {
+  max-width: 640px;
+  margin: 0 auto;
+  counter-reset: flow;
+  position: relative;
+}
+
+.flow-step {
+  position: relative;
+  counter-increment: flow;
+  padding: 0 0 44px 66px;
+}
+
+/* 縦の線 */
+.flow-step::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 44px;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--color-border);
+}
+
+.flow-step:last-child::before {
+  display: none;
+}
+
+.flow-step:last-child {
+  padding-bottom: 0;
+}
+
+/* 番号の丸 */
+.flow-step::after {
+  content: counter(flow);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  font-family: var(--font-en);
+  font-size: 17px;
+  color: var(--color-accent);
+}
+
+.flow-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding-top: 8px;
+  margin-bottom: 8px;
+}
+
+.flow-step p {
+  font-size: 14.5px;
+  color: var(--color-text-light);
+}
+
+/* ------------------------------------------------------------
+   プロフィール
+   ------------------------------------------------------------ */
+.profile-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.profile-table {
+  margin-bottom: 34px;
+  border-top: 1px solid var(--color-border);
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-row dt {
+  font-size: 13.5px;
+  color: var(--color-text-light);
+  letter-spacing: 0.08em;
+}
+
+.profile-row dd {
+  font-size: 14.5px;
+}
+
+.profile-text {
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------------
+   お客様の声
+   ------------------------------------------------------------ */
+.sample-notice {
+  max-width: 720px;
+  margin: -24px auto 40px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-accent-sub);
+}
+
+.voice-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.voice-card {
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  padding: 30px 28px 24px;
+  position: relative;
+}
+
+.voice-card::before {
+  content: "“";
+  position: absolute;
+  top: 6px;
+  left: 18px;
+  font-family: var(--font-en);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
+.voice-text {
+  font-size: 14.5px;
+  margin-bottom: 14px;
+}
+
+.voice-meta {
+  font-size: 12px;
+  color: var(--color-text-light);
+  text-align: right;
+}
+
+/* ------------------------------------------------------------
+   FAQ（アコーディオン）
+   ------------------------------------------------------------ */
+.faq-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-heading {
+  margin: 0;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  padding: 22px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+/* 開閉アイコン（＋ / −） */
+.faq-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-accent);
+  transition: transform 0.25s;
+}
+
+.faq-icon::after {
+  transform: rotate(90deg);
+}
+
+.faq-question[aria-expanded="true"] .faq-icon::after {
+  transform: rotate(0deg);
+}
+
+.faq-answer {
+  padding: 0 40px 24px 8px;
+  font-size: 14.5px;
+  color: var(--color-text-light);
+}
+
+/* ------------------------------------------------------------
+   出演場所・所属店舗
+   ------------------------------------------------------------ */
+.shop-body {
+  text-align: center;
+}
+
+.shop-body > p + p {
+  margin-top: 1em;
+}
+
+.shop-info-box {
+  margin: 44px auto 0;
+  max-width: 640px;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  padding: 30px 28px;
+  text-align: left;
+}
+
+.shop-info-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.shop-info-table {
+  border-top: 1px solid var(--color-border);
+}
+
+/* ------------------------------------------------------------
+   SNS
+   ------------------------------------------------------------ */
+.sns-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* JavaScriptで非表示にされたSNS */
+.sns-card.is-hidden,
+[data-sns].is-hidden {
+  display: none;
+}
+
+.sns-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 32px 22px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  text-align: center;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.sns-link:hover {
+  opacity: 1;
+  border-color: var(--color-accent);
+  box-shadow: 0 3px 14px rgba(23, 27, 42, 0.06);
+}
+
+.sns-icon {
+  color: var(--color-accent);
+}
+
+.sns-name {
+  font-family: var(--font-en);
+  font-size: 17px;
+  letter-spacing: 0.12em;
+}
+
+.sns-desc {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   予約への誘導（夜明けの空・大セクション）
+   ------------------------------------------------------------ */
+.reserve-cta {
+  position: relative;
+  padding: 120px 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 112%, rgba(200, 168, 106, 0.45) 0%, rgba(200, 168, 106, 0) 60%),
+    linear-gradient(180deg, #12151f 0%, var(--color-ink) 40%, var(--color-ink-2) 78%, #3d3a53 100%);
+  color: #f2edde;
+  text-align: center;
+  overflow: hidden;
+}
+
+.reserve-cta::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(216, 187, 128, 0) 0%, rgba(216, 187, 128, 0.8) 50%, rgba(216, 187, 128, 0) 100%);
+  pointer-events: none;
+}
+
+.reserve-cta-title {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 2;
+  margin-bottom: 30px;
+}
+
+.reserve-cta-text {
+  font-size: 15px;
+  line-height: 2.2;
+  color: rgba(240, 234, 218, 0.88);
+  margin-bottom: 48px;
+}
+
+.reserve-cta-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.reserve-cta-sub {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ------------------------------------------------------------
+   注意事項
+   ------------------------------------------------------------ */
+.notes-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.notes-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.notes-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 8px;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
+/* ------------------------------------------------------------
+   フッター
+   ------------------------------------------------------------ */
+.site-footer {
+  background-color: var(--color-ink);
+  color: #d8d3c4;
+  padding: 72px 0 44px;
+  font-size: 14px;
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 44px;
+  margin-bottom: 48px;
+}
+
+.footer-name {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  color: #f2edde;
+}
+
+.footer-en {
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(216, 187, 128, 0.9);
+  margin: 6px 0 10px;
+}
+
+.footer-role {
+  font-size: 13px;
+  color: #a8a294;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-bottom: 18px;
+}
+
+.footer-links a {
+  color: #d8d3c4;
+  font-size: 13.5px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-links-legal a {
+  color: #a8a294;
+}
+
+.footer-disclaimer {
+  font-size: 12.5px;
+  color: #a8a294;
+  border-top: 1px solid rgba(216, 211, 196, 0.15);
+  padding-top: 28px;
+  margin-bottom: 18px;
+  line-height: 2;
+}
+
+.footer-copyright {
+  font-size: 12px;
+  color: #8d887b;
+}
+
+/* ------------------------------------------------------------
+   ページ上部へ戻るボタン
+   ------------------------------------------------------------ */
+.back-to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  z-index: 90;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background-color: rgba(250, 248, 241, 0.92);
+  color: var(--color-accent);
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   スマートフォン用固定予約ボタン
+   ------------------------------------------------------------ */
+.mobile-fixed-reserve {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   スクロール時のフェードイン（控えめ）
+   JavaScriptが無効な場合は最初から表示されます。
+   ------------------------------------------------------------ */
+.reveal.reveal-ready {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.reveal-ready.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   動きを減らす設定への対応
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal.reveal-ready {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   タブレット以下
+   ------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .about-layout,
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-photo-frame,
+  .profile-photo-frame {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .step3,
+  .feature-grid {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .goshintaku-text {
+    text-align: left;
+  }
+}
+
+/* ------------------------------------------------------------
+   スマートフォン
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+    /* 固定予約ボタンでフッターが隠れないよう余白を確保 */
+    padding-bottom: 88px;
+  }
+
+  .section {
+    padding: 68px 0;
+  }
+
+  /* ハンバーガーメニュー */
+  .menu-toggle {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .header-reserve-btn {
+    display: none;
+  }
+
+  .global-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    background-color: rgba(248, 245, 235, 0.99);
+    padding: 32px 24px 40px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0.3s;
+  }
+
+  .global-nav.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .global-nav-list {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .global-nav-list a {
+    display: block;
+    padding: 16px 6px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-reserve-btn {
+    display: block;
+    width: 100%;
+  }
+
+  /* メニューを開いている間は背景のスクロールを止める */
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .worry-list,
+  .price-list,
+  .voice-list {
+    grid-template-columns: 1fr;
+  }
+
+  .price-item-pair {
+    grid-column: auto;
+  }
+
+  .profile-row {
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+  }
+
+  .hero {
+    padding-bottom: 72px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .reserve-cta {
+    padding: 88px 0;
+  }
+
+  .btn-xl {
+    padding: 16px 28px;
+    font-size: 16px;
+  }
+
+  /* スマートフォン用の固定予約ボタンを表示 */
+  .mobile-fixed-reserve {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background-color: rgba(23, 27, 42, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* 固定ボタンと重ならないよう、戻るボタンを上へ */
+  .back-to-top {
+    bottom: 92px;
+  }
+
+  .faq-answer {
+    padding-right: 8px;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
