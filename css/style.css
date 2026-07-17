@@ -790,43 +790,64 @@ button:focus-visible {
 
 
 /* ------------------------------------------------------------
-   今日の一枚（タロット演出）
+   今日の一枚（オラクルカード演出）
    ------------------------------------------------------------ */
 .tarot-lead {
   text-align: center;
-  margin: -20px 0 48px;
+  margin: -20px 0 56px;
   font-family: var(--font-heading);
   font-size: 15.5px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  line-height: 2.3;
 }
 
 .tarot-cards {
   display: flex;
   justify-content: center;
-  gap: clamp(14px, 4vw, 34px);
-  perspective: 1200px;
-  margin-bottom: 40px;
+  gap: clamp(16px, 4.5vw, 40px);
+  perspective: 1400px;
+  margin-bottom: 44px;
 }
 
 .tarot-card {
-  width: clamp(88px, 24vw, 150px);
+  width: clamp(96px, 25vw, 164px);
   aspect-ratio: 5 / 8;
   background: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  animation: card-float 5.5s ease-in-out infinite;
 }
 
-/* 選ばれなかったカードは静かに退く */
+/* 待機中、カードがゆっくり漂う */
+.tarot-card:nth-child(1) { animation-delay: 0s; }
+.tarot-card:nth-child(2) { animation-delay: 1.8s; }
+.tarot-card:nth-child(3) { animation-delay: 3.6s; }
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+.tarot-card.is-flipped,
 .tarot-card.is-dimmed {
-  opacity: 0.25;
-  pointer-events: none;
-  transform: translateY(6px);
+  animation: none;
 }
 
-.tarot-card:hover:not(.is-flipped):not(.is-dimmed) {
-  transform: translateY(-10px);
+.tarot-card:hover:not(.is-flipped):not(.is-dimmed),
+.tarot-card:focus-visible:not(.is-flipped):not(.is-dimmed) {
+  animation-play-state: paused;
+  transform: translateY(-14px);
+  filter: drop-shadow(0 14px 22px rgba(23, 27, 42, 0.28));
+}
+
+/* 選ばれなかったカードは静かに伏せられる */
+.tarot-card.is-dimmed {
+  opacity: 0.18;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.96);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .tarot-card-inner {
@@ -835,7 +856,7 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.3, 0.1, 0.25, 1);
+  transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.2, 1);
 }
 
 .tarot-card.is-flipped .tarot-card-inner {
@@ -852,110 +873,183 @@ button:focus-visible {
   justify-content: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 8px;
+  border-radius: 9px;
+  overflow: hidden;
 }
 
-/* カードの裏面：夜の空に金の紋様 */
+/* ---------- 裏面：夜の空と金の紋 ---------- */
 .tarot-card-back {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 108%, rgba(216, 187, 128, 0.3) 0%, rgba(216, 187, 128, 0) 62%),
-    linear-gradient(165deg, #1a2036 0%, #12151f 100%);
-  border: 1px solid rgba(216, 187, 128, 0.55);
-  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.35);
+    radial-gradient(ellipse 90% 46% at 50% 112%, rgba(216, 187, 128, 0.34) 0%, rgba(216, 187, 128, 0) 64%),
+    radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 32%),
+    linear-gradient(168deg, #1c2340 0%, #141828 55%, #10131d 100%);
+  border: 1px solid rgba(216, 187, 128, 0.65);
+  box-shadow:
+    inset 0 0 0 1px rgba(16, 19, 29, 1),
+    inset 0 0 0 2px rgba(216, 187, 128, 0.28),
+    0 8px 22px rgba(16, 19, 29, 0.4);
 }
 
+/* 裏面の星屑 */
+.tarot-card-back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 1px at 24% 20%, rgba(238, 231, 210, 0.9) 0 1px, transparent 1.5px),
+    radial-gradient(circle 1px at 70% 14%, rgba(238, 231, 210, 0.7) 0 1px, transparent 1.5px),
+    radial-gradient(circle 1px at 82% 34%, rgba(238, 231, 210, 0.55) 0 1px, transparent 1.5px),
+    radial-gradient(circle 1px at 14% 44%, rgba(238, 231, 210, 0.6) 0 1px, transparent 1.5px),
+    radial-gradient(circle 1px at 60% 52%, rgba(238, 231, 210, 0.45) 0 1px, transparent 1.5px),
+    radial-gradient(circle 1px at 36% 66%, rgba(238, 231, 210, 0.5) 0 1px, transparent 1.5px);
+}
+
+/* 裏面中央の紋：三日月と光 */
 .tarot-back-emblem {
-  width: 58%;
-  aspect-ratio: 1 / 1;
-  border: 1px solid rgba(216, 187, 128, 0.7);
-  border-radius: 50%;
   position: relative;
+  width: 56%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(216, 187, 128, 0.75);
+  border-radius: 50%;
 }
 
 .tarot-back-emblem::before {
   content: "";
   position: absolute;
-  inset: 14%;
-  border: 1px solid rgba(216, 187, 128, 0.45);
+  inset: 11%;
+  border: 1px dashed rgba(216, 187, 128, 0.4);
   border-radius: 50%;
 }
 
 .tarot-back-emblem::after {
   content: "";
   position: absolute;
-  inset: 34%;
-  background: radial-gradient(circle, rgba(216, 187, 128, 0.85) 0%, rgba(216, 187, 128, 0) 72%);
+  inset: 27%;
   border-radius: 50%;
+  background: radial-gradient(circle at 62% 38%, transparent 0 46%, rgba(216, 187, 128, 0.9) 48% 58%, transparent 60%),
+              radial-gradient(circle, rgba(216, 187, 128, 0.35) 0%, rgba(216, 187, 128, 0) 70%);
 }
 
-/* カードの表面：生成りに墨と金 */
+/* ---------- 表面：夜の空に金の線画 ---------- */
 .tarot-card-front {
   transform: rotateY(180deg);
-  background: linear-gradient(170deg, #faf6ea 0%, #f0e9d5 100%);
-  border: 1px solid var(--color-accent);
-  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.2);
-  gap: 6px;
-  padding: 10px 6px;
+  background:
+    radial-gradient(ellipse 100% 52% at 50% 116%, rgba(216, 187, 128, 0.28) 0%, rgba(216, 187, 128, 0) 62%),
+    linear-gradient(172deg, #202848 0%, #161b2e 58%, #11141f 100%);
+  border: 1px solid rgba(216, 187, 128, 0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(16, 19, 29, 1),
+    inset 0 0 0 2px rgba(216, 187, 128, 0.3),
+    0 8px 22px rgba(16, 19, 29, 0.4);
+  gap: clamp(6px, 1.4vw, 12px);
+  padding: 12% 8%;
   text-align: center;
 }
 
-.tarot-card-num {
-  font-family: var(--font-en);
-  font-size: clamp(10px, 1.6vw, 13px);
-  letter-spacing: 0.2em;
-  color: var(--color-accent);
+/* めくれた瞬間、光がひと筋よぎる */
+.tarot-card-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(238, 224, 188, 0.28) 50%, transparent 70%);
+  transform: translateX(-120%);
 }
 
-.tarot-card-symbol {
-  font-size: clamp(26px, 6vw, 44px);
-  line-height: 1.2;
+.tarot-card.is-flipped .tarot-card-front::after {
+  animation: card-shine 1.4s ease 0.55s 1 both;
+}
+
+@keyframes card-shine {
+  from { transform: translateX(-120%); }
+  to   { transform: translateX(120%); }
+}
+
+/* カードの絵柄（金の線画SVG） */
+.tarot-card-art {
+  width: 62%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d8bb80;
+  border: 1px solid rgba(216, 187, 128, 0.45);
+  border-radius: 50%;
+  padding: 12%;
+  filter: drop-shadow(0 0 7px rgba(216, 187, 128, 0.35));
+}
+
+.tarot-card-art svg {
+  width: 100%;
+  height: 100%;
 }
 
 .tarot-card-name {
   font-family: var(--font-heading);
-  font-size: clamp(11px, 2.2vw, 15px);
+  font-size: clamp(14px, 2.6vw, 19px);
   font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-text);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: #efe8d4;
 }
 
 .tarot-card-en {
   font-family: var(--font-en);
   font-size: clamp(8px, 1.4vw, 11px);
-  letter-spacing: 0.14em;
-  color: var(--color-text-light);
+  letter-spacing: 0.26em;
+  color: rgba(216, 187, 128, 0.85);
   text-transform: uppercase;
 }
 
-/* 結果表示 */
+/* ---------- 結果表示 ---------- */
 .tarot-result {
-  max-width: 560px;
+  position: relative;
+  max-width: 580px;
   margin: 0 auto;
-  padding: 30px 30px 26px;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-top: 2px solid var(--color-accent);
+  padding: 38px 34px 30px;
+  background:
+    radial-gradient(ellipse 110% 60% at 50% 118%, rgba(216, 187, 128, 0.22) 0%, rgba(216, 187, 128, 0) 60%),
+    linear-gradient(172deg, #1d2440 0%, #141828 100%);
+  border: 1px solid rgba(216, 187, 128, 0.55);
+  color: #efe8d4;
   text-align: center;
-  animation: tarot-result-in 0.7s ease both;
+  animation: tarot-result-in 0.8s ease both;
+}
+
+/* 結果の上に走る金の一筋 */
+.tarot-result::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(216, 187, 128, 0) 0%, rgba(216, 187, 128, 0.95) 50%, rgba(216, 187, 128, 0) 100%);
 }
 
 @keyframes tarot-result-in {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .tarot-result-name {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-bottom: 12px;
+  letter-spacing: 0.18em;
+  margin-bottom: 14px;
+  color: #d8bb80;
 }
 
 .tarot-result-message {
   font-size: 14.5px;
-  line-height: 2.1;
-  margin-bottom: 20px;
+  line-height: 2.2;
+  margin-bottom: 24px;
+  color: rgba(240, 234, 218, 0.94);
+}
+
+.tarot-result .btn-outline {
+  color: #efe8d4;
+  border-color: rgba(216, 187, 128, 0.7);
 }
 
 /* ------------------------------------------------------------
