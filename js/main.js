@@ -14,7 +14,7 @@
    ------------------------------------------------------------ */
 const SITE_LINKS = {
   reservation: "https://noa-fortune.stores.jp/reserve/sakae/2063769#pageContent",
-  instagram: "https://instagram.com/ここを変更",   // ここを変更：InstagramのURL
+  instagram: "https://www.instagram.com/haremichimochiharu",   // Instagram（設定済み）
   x: "https://x.com/ここを変更",                    // ここを変更：X（旧Twitter）のURL
   tiktok: "https://www.tiktok.com/@ここを変更",     // ここを変更：TikTokのURL
   youtube: "https://www.youtube.com/@ここを変更",   // ここを変更：YouTubeのURL
@@ -158,6 +158,77 @@ document.addEventListener("DOMContentLoaded", function () {
       observer.observe(el);
     });
   }
+
+
+  /* ----------------------------------------------------------
+     ファーストビューの星と金の粒子
+     ・「動きを減らす」設定の場合は生成しない
+     ---------------------------------------------------------- */
+  var heroBg = document.querySelector(".hero-bg");
+
+  if (heroBg && !prefersReducedMotion) {
+    // 夜空にまたたく星
+    for (var i = 0; i < 42; i++) {
+      var star = document.createElement("span");
+      star.className = "hero-star";
+      var size = 1 + Math.random() * 1.6;
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 62 + "%";
+      star.style.animationDuration = (2.6 + Math.random() * 4) + "s";
+      star.style.animationDelay = (Math.random() * 5) + "s";
+      heroBg.appendChild(star);
+    }
+
+    // 地平線から立ちのぼる金の粒子
+    for (var j = 0; j < 12; j++) {
+      var p = document.createElement("span");
+      p.className = "hero-particle";
+      p.style.left = (8 + Math.random() * 84) + "%";
+      p.style.animationDuration = (9 + Math.random() * 9) + "s";
+      p.style.animationDelay = (Math.random() * 12) + "s";
+      heroBg.appendChild(p);
+    }
+  }
+
+  /* ----------------------------------------------------------
+     スクロールで空の色が夜から夜明けへ変わる
+     ・ページを下るほど、背景がわずかに暖かい色になります
+     ---------------------------------------------------------- */
+  function lerpColor(c1, c2, t) {
+    var r = Math.round(c1[0] + (c2[0] - c1[0]) * t);
+    var g = Math.round(c1[1] + (c2[1] - c1[1]) * t);
+    var b = Math.round(c1[2] + (c2[2] - c1[2]) * t);
+    return "rgb(" + r + "," + g + "," + b + ")";
+  }
+
+  // ここを変更：スクロールによる背景色の変化（上→下）
+  var skyBgFrom = [250, 248, 241];      // --color-bg の開始色（夜側・冷たいアイボリー）
+  var skyBgTo = [250, 242, 224];        // --color-bg の終了色（夜明け側・暖かい生成り）
+  var skyAltFrom = [242, 238, 225];     // --color-bg-light の開始色
+  var skyAltTo = [243, 232, 207];       // --color-bg-light の終了色
+
+  var skyTicking = false;
+
+  function updateSky() {
+    skyTicking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    var t = Math.min(1, Math.max(0, window.scrollY / max));
+    var root = document.documentElement;
+    root.style.setProperty("--color-bg", lerpColor(skyBgFrom, skyBgTo, t));
+    root.style.setProperty("--color-bg-light", lerpColor(skyAltFrom, skyAltTo, t));
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!skyTicking) {
+      skyTicking = true;
+      window.requestAnimationFrame(updateSky);
+    }
+  }, { passive: true });
+
+  updateSky();
 
   /* ----------------------------------------------------------
      ページ上部へ戻るボタン

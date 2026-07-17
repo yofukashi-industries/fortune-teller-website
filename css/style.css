@@ -48,6 +48,7 @@ html {
 
 body {
   font-family: var(--font-body);
+  transition: background-color 0.4s linear;
   font-size: 16px;
   line-height: 1.9;
   letter-spacing: 0.03em;
@@ -465,16 +466,102 @@ button:focus-visible {
   }
 }
 
+
+/* ------------------------------------------------------------
+   ファーストビューの演出（星・金の粒子・呼吸する地平線の光）
+   「動きを減らす」設定では自動的に停止します。
+   ------------------------------------------------------------ */
+
+/* またたく星（JavaScriptで生成） */
+.hero-star {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #e8e2cf;
+  opacity: 0;
+  animation: star-twinkle 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.85; }
+}
+
+/* 地平線から立ちのぼる金の粒子（JavaScriptで生成） */
+.hero-particle {
+  position: absolute;
+  bottom: 10%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: rgba(216, 187, 128, 0.85);
+  box-shadow: 0 0 6px rgba(216, 187, 128, 0.7);
+  opacity: 0;
+  animation: particle-rise 12s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particle-rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: 0.9; }
+  60%  { opacity: 0.5; }
+  100% { transform: translateY(-46vh) translateX(14px); opacity: 0; }
+}
+
+/* 地平線の光がゆっくり呼吸する */
+.hero-horizon {
+  animation: horizon-breath 7s ease-in-out infinite;
+}
+
+@keyframes horizon-breath {
+  0%, 100% { opacity: 0.65; transform: scaleX(0.96); }
+  50%      { opacity: 1; transform: scaleX(1); }
+}
+
+/* 地平線の下から滲む夜明けの光 */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: radial-gradient(ellipse 90% 100% at 50% 118%, rgba(216, 187, 128, 0.38) 0%, rgba(216, 187, 128, 0) 68%);
+  animation: dawn-glow 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes dawn-glow {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+/* ページ最後の予約セクション：昇りはじめた太陽の光 */
+.reserve-cta::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: 420px;
+  height: 220px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(222, 192, 132, 0.5) 0%, rgba(222, 192, 132, 0) 70%);
+  animation: dawn-glow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
 /* ------------------------------------------------------------
    セクション共通
    ------------------------------------------------------------ */
 .section {
   padding: 96px 0;
   background-color: var(--color-bg);
+  transition: background-color 0.4s linear;
 }
 
 .section-alt {
   background-color: var(--color-bg-light);
+  transition: background-color 0.4s linear;
 }
 
 .container {
