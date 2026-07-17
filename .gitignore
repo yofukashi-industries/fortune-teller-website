@@ -1,0 +1,12 @@
+# OSが自動生成するファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# エディタの設定フォルダ
+.vscode/
+.idea/
+
+# 一時ファイル
+*.log
+*.tmp
