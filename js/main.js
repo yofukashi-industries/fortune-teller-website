@@ -230,6 +230,93 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateSky();
 
+
+  /* ----------------------------------------------------------
+     今日の一枚（タロット演出）
+     ・3枚から1枚を選ぶと、大アルカナからランダムに1枚が表示されます
+     ・メッセージは断定を避けた、やわらかい言葉にしています
+     ---------------------------------------------------------- */
+
+  // ここを変更：カードの名前・記号・メッセージは自由に編集できます
+  var TAROT_CARDS = [
+    { num: "0",    en: "The Fool",           name: "愚者",     symbol: "\u{1F332}", message: "新しい一歩を踏み出したくなる日。完璧な準備よりも、軽やかな気持ちを大切にしてみてください。" },
+    { num: "I",    en: "The Magician",       name: "魔術師",   symbol: "\u2728",    message: "あなたの中に、すでに必要な力が揃っているようです。小さなことから形にしてみると流れが生まれます。" },
+    { num: "II",   en: "The High Priestess", name: "女教皇",   symbol: "\u{1F319}", message: "静かに考える時間が味方になる日。答えを急がず、心の声に耳を傾けてみてください。" },
+    { num: "III",  en: "The Empress",        name: "女帝",     symbol: "\u{1F33E}", message: "自分を労わることが、まわりへの優しさにつながります。今日は少しだけ自分を甘やかしても大丈夫。" },
+    { num: "IV",   en: "The Emperor",        name: "皇帝",     symbol: "\u26F0",    message: "土台を整えることに向いている日。決めたことを一つ、丁寧に積み上げてみてください。" },
+    { num: "V",    en: "The Hierophant",     name: "教皇",     symbol: "\u{1F54A}", message: "信頼できる人の言葉にヒントがありそうです。素直に相談してみると、心が軽くなるかもしれません。" },
+    { num: "VI",   en: "The Lovers",         name: "恋人",     symbol: "\u{1F49E}", message: "心が動く方を選んでよい日。迷ったときは「どちらが自分らしいか」を基準にしてみてください。" },
+    { num: "VII",  en: "The Chariot",        name: "戦車",     symbol: "\u{1F6E4}", message: "前へ進む勢いがある日。目的地を一つに絞ると、力がまっすぐに届きます。" },
+    { num: "VIII", en: "Strength",           name: "力",       symbol: "\u{1F98B}", message: "強さとは、静かで穏やかなもの。焦らず、やわらかい気持ちで向き合うほど物事が動きそうです。" },
+    { num: "IX",   en: "The Hermit",         name: "隠者",     symbol: "\u{1F3EE}", message: "一人の時間が心を整えてくれる日。少し立ち止まって、自分の本当の気持ちを見つめてみてください。" },
+    { num: "X",    en: "Wheel of Fortune",   name: "運命の輪", symbol: "\u2638",    message: "流れが変わりはじめる気配。変化を怖がらず、来たものを受けとめてみると良さそうです。" },
+    { num: "XI",   en: "Justice",            name: "正義",     symbol: "\u2696",    message: "気持ちと現実のバランスを見直すのに良い日。公平な目で状況を眺めると、答えが見えてきます。" },
+    { num: "XII",  en: "The Hanged Man",     name: "吊るされた男", symbol: "\u{1F343}", message: "思い通りに進まない時こそ、視点を変えるチャンス。逆さまから眺めると、新しい発見がありそうです。" },
+    { num: "XIII", en: "Death",              name: "死神",     symbol: "\u{1F98A}", message: "一つの区切りは、次のはじまりの合図。手放すことで、新しい風が入ってくる時期です。" },
+    { num: "XIV",  en: "Temperance",         name: "節制",     symbol: "\u{1F4A7}", message: "ほどよいバランスが幸運の鍵。頑張りすぎず、休みすぎず、心地よいペースを探してみてください。" },
+    { num: "XV",   en: "The Devil",          name: "悪魔",     symbol: "\u{1F517}", message: "つい繰り返してしまう習慣を、少しだけ見直してみると良い日。気づくだけでも大きな一歩です。" },
+    { num: "XVI",  en: "The Tower",          name: "塔",       symbol: "\u26A1",    message: "予想外の出来事は、実は身軽になるきっかけかもしれません。大切なものは、ちゃんと残ります。" },
+    { num: "XVII", en: "The Star",           name: "星",       symbol: "\u2B50",    message: "希望が見えてくる日。小さな願いを言葉にしてみると、進む方向がはっきりしてきます。" },
+    { num: "XVIII",en: "The Moon",           name: "月",       symbol: "\u{1F315}", message: "不安の正体は、まだ見えていないだけのことが多いもの。焦らず、夜が明けるのを待つ心持ちで。" },
+    { num: "XIX",  en: "The Sun",            name: "太陽",     symbol: "\u2600",    message: "素直な気持ちで過ごすほど、明るい流れが集まる日。楽しいと感じることを大切にしてください。" },
+    { num: "XX",   en: "Judgement",          name: "審判",     symbol: "\u{1F3BA}", message: "一度あきらめたことに、もう一度光が当たりそう。呼ばれている気がしたら、応えてみてください。" },
+    { num: "XXI",  en: "The World",          name: "世界",     symbol: "\u{1F30D}", message: "一つの物事が実を結ぶ気配。ここまでの歩みをねぎらいながら、次の景色を思い描いてみてください。" }
+  ];
+
+  var tarotArea = document.getElementById("tarot-cards");
+  var tarotResult = document.getElementById("tarot-result");
+  var tarotResultName = document.getElementById("tarot-result-name");
+  var tarotResultMessage = document.getElementById("tarot-result-message");
+  var tarotReset = document.getElementById("tarot-reset");
+  var tarotDrawn = false;
+
+  function resetTarot() {
+    tarotDrawn = false;
+    tarotResult.setAttribute("hidden", "");
+    tarotArea.querySelectorAll(".tarot-card").forEach(function (card) {
+      card.classList.remove("is-flipped", "is-dimmed");
+      card.disabled = false;
+    });
+  }
+
+  if (tarotArea && tarotResult) {
+    tarotArea.querySelectorAll(".tarot-card").forEach(function (card) {
+      card.addEventListener("click", function () {
+        if (tarotDrawn) return;
+        tarotDrawn = true;
+
+        var drawn = TAROT_CARDS[Math.floor(Math.random() * TAROT_CARDS.length)];
+
+        // 表面に内容を書き込む
+        card.querySelector(".tarot-card-num").textContent = drawn.num;
+        card.querySelector(".tarot-card-symbol").textContent = drawn.symbol;
+        card.querySelector(".tarot-card-name").textContent = drawn.name;
+        card.querySelector(".tarot-card-en").textContent = drawn.en;
+
+        // 選んだカードをめくり、他は静かに退く
+        card.classList.add("is-flipped");
+        tarotArea.querySelectorAll(".tarot-card").forEach(function (other) {
+          if (other !== card) {
+            other.classList.add("is-dimmed");
+            other.disabled = true;
+          }
+        });
+
+        // めくり終わったころに結果を表示（動きを減らす設定では即表示）
+        var delay = prefersReducedMotion ? 0 : 650;
+        setTimeout(function () {
+          tarotResultName.textContent = drawn.num + "　" + drawn.name + " ─ " + drawn.en;
+          tarotResultMessage.textContent = drawn.message;
+          tarotResult.removeAttribute("hidden");
+        }, delay);
+      });
+    });
+
+    if (tarotReset) {
+      tarotReset.addEventListener("click", resetTarot);
+    }
+  }
+
   /* ----------------------------------------------------------
      ページ上部へ戻るボタン
      ---------------------------------------------------------- */

@@ -100,6 +100,7 @@
           <li><a href="#home">ホーム</a></li>
           <li><a href="#about">晴道望喜について</a></li>
           <li><a href="#goshintaku">鑑定について</a></li>
+          <li><a href="#tarot">今日の一枚</a></li>
           <li><a href="#pricing">鑑定料金</a></li>
           <li><a href="#first-time">初めての方へ</a></li>
           <li><a href="#profile">プロフィール</a></li>
@@ -280,6 +281,80 @@
             <p>受け取った言葉をもとに、これから取れる選択肢を一緒に整理します。</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+
+    <!-- ==========================================================
+         今日の一枚（タロット演出）
+         ========================================================== -->
+    <section class="section section-alt" id="tarot">
+      <div class="container container-narrow">
+        <p class="section-eyebrow">One Card</p>
+        <h2 class="section-title reveal">今日の一枚</h2>
+
+        <p class="tarot-lead reveal">
+          気になるカードを一枚、直感でお選びください。<br>
+          今日のあなたへの、小さな道しるべです。
+        </p>
+
+        <div class="tarot-table reveal">
+          <div class="tarot-cards" id="tarot-cards">
+            <button class="tarot-card" type="button" data-card="0" aria-label="1枚目のカードを引く">
+              <span class="tarot-card-inner">
+                <span class="tarot-card-back" aria-hidden="true"><span class="tarot-back-emblem"></span></span>
+                <span class="tarot-card-front">
+                  <span class="tarot-card-num" aria-hidden="true"></span>
+                  <span class="tarot-card-symbol" aria-hidden="true"></span>
+                  <span class="tarot-card-name"></span>
+                  <span class="tarot-card-en" aria-hidden="true"></span>
+                </span>
+              </span>
+            </button>
+            <button class="tarot-card" type="button" data-card="1" aria-label="2枚目のカードを引く">
+              <span class="tarot-card-inner">
+                <span class="tarot-card-back" aria-hidden="true"><span class="tarot-back-emblem"></span></span>
+                <span class="tarot-card-front">
+                  <span class="tarot-card-num" aria-hidden="true"></span>
+                  <span class="tarot-card-symbol" aria-hidden="true"></span>
+                  <span class="tarot-card-name"></span>
+                  <span class="tarot-card-en" aria-hidden="true"></span>
+                </span>
+              </span>
+            </button>
+            <button class="tarot-card" type="button" data-card="2" aria-label="3枚目のカードを引く">
+              <span class="tarot-card-inner">
+                <span class="tarot-card-back" aria-hidden="true"><span class="tarot-back-emblem"></span></span>
+                <span class="tarot-card-front">
+                  <span class="tarot-card-num" aria-hidden="true"></span>
+                  <span class="tarot-card-symbol" aria-hidden="true"></span>
+                  <span class="tarot-card-name"></span>
+                  <span class="tarot-card-en" aria-hidden="true"></span>
+                </span>
+              </span>
+            </button>
+          </div>
+
+          <div class="tarot-result" id="tarot-result" aria-live="polite" hidden>
+            <p class="tarot-result-name" id="tarot-result-name"></p>
+            <p class="tarot-result-message" id="tarot-result-message"></p>
+            <button class="btn btn-outline btn-sm" type="button" id="tarot-reset">もう一度引く</button>
+          </div>
+        </div>
+
+        <p class="section-note-small reveal">
+          こちらはエンターテインメントとしてお楽しみいただく簡易的なものです。<br>
+          じっくりとした鑑定をご希望の方は、ぜひ対面鑑定へお越しください。
+        </p>
+
+        <div class="section-cta reveal">
+          <a class="btn btn-primary" data-link="reservation"
+             href="https://noa-fortune.stores.jp/reserve/sakae/2063769#pageContent"
+             target="_blank" rel="noopener">
+            鑑定を予約する<span class="external-mark" aria-hidden="true">↗</span>
+            <span class="visually-hidden">（外部の公式予約ページが別タブで開きます）</span>
+          </a>
+        </div>
       </div>
     </section>
 
